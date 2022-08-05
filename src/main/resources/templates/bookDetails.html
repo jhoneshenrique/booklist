@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Details Book</title>
+    <!-- Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- Summer Note-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Book List</a>
+        </div>
+    </nav>
+</header>
+<section>
+    <div class="container"  style="width: 70%; margin-top: 20px">
+        <!-- BREADCRUMB -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                <li class="breadcrumb-item"><a href="/books">Books</a></li>
+                <li class="breadcrumb-item active" aria-current="page">New Book</li>
+            </ol>
+        </nav>
+
+        <!-- Conteúdo do texto -->
+        <article>
+            <h1 class="card-title" style="font-weight: bold; margin-bottom: 20px;"><span th:text="${book.title}"></span></h1>
+            <p class="card-subtitle mb-2 text-muted">
+                <span th:text="${book.author}"></span>
+                <br>
+                <span th:text="${book.publishingDate}"></span>
+            </p>
+            <p class="card-text"><span th:text="${book.readingDate}"></span></p>
+            <section>
+                <p class="card-text" style="margin-top: 40px;"><span th:utext="${book.review}"></span></p>
+            </section>
+        </article>
+
+</section>
+
+</body>
+</html>

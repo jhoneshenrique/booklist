@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Book</title>
+    <!-- Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Book List</a>
+        </div>
+    </nav>
+</header>
+<section>
+    <div class="container"  style="width: 70%; margin-top: 20px">
+        <!-- BREADCRUMB -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                <li class="breadcrumb-item"><a href="/books">My Lists</a></li>
+                <li class="breadcrumb-item active" aria-current="page">New List</li>
+            </ol>
+        </nav>
+
+        <div>
+            <h1 class="display-4">Add a new list</h1>
+            <form method="post">
+                <div class="form-group mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 15px;">New List</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

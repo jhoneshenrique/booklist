@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Book</title>
+    <!-- Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- Summer Note-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Book List</a>
+        </div>
+    </nav>
+</header>
+<section>
+    <div class="container"  style="width: 70%; margin-top: 20px">
+        <!-- BREADCRUMB -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                <li class="breadcrumb-item"><a href="/books">Books</a></li>
+                <li class="breadcrumb-item active" aria-current="page">New Book</li>
+            </ol>
+        </nav>
+
+        <div>
+            <h1 class="display-4">Add a new book</h1>
+            <form method="post">
+                <div class="form-group mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="author" class="form-label">Author:</label>
+                    <input type="text" class="form-control" id="author" name="author">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="publishingDate" class="form-label">Published at:</label>
+                    <input type="date" class="form-control" id="publishingDate" name="publishingDate" >
+                </div>
+                <div class="form-group mb-3">
+                    <label for="readingDate" class="form-label">Finished reading at:</label>
+                    <input type="date" class="form-control" id="readingDate" name="readingDate" >
+                </div>
+
+                <label for="summernote" class="form-label">Personal Review:</label>
+                <textarea id="summernote" type="text" class="form-control" name="review"></textarea>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 15px;">Add Book</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Texto *',
+        tabsize: 2,
+        height: 300
+    });
+</script>
+</body>
+</html>
