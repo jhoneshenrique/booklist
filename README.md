@@ -4,10 +4,10 @@
 lists and inside them the books. The person will be able to make personal comments about the book, that way he/she can read it after a time and remember
 what he/she thought about it. 
 
-## technologies
- -Java 11
- -Spring Boot MVC
- -Spring Security - JPA Authentication
- -Thymeleaf
- -Bootstrap
- -Mysql
+## The technologies used:
+ - Java 11
+ - Spring Boot MVC
+ - Spring Security - JPA Authentication
+ - Thymeleaf
+ - Bootstrap
+ - Mysql
