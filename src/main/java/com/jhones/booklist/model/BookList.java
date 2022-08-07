@@ -20,7 +20,7 @@ public class BookList {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateCreation;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "bookList",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Book> books;
 
     public List<Book> getBooks() {
