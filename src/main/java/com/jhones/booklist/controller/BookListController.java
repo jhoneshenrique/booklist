@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,10 +44,28 @@ public class BookListController {
         return modelAndView;
     }
 
+    //Deleta a booklist from DB
     @RequestMapping(value = "/booklist/delete", method = RequestMethod.GET)
     public String deleteList(long id){
         BookList bookList = bookListImpleme.findById(id);
         bookListImpleme.delete(bookList);
+        return "redirect:/booklist";
+    }
+
+    //Load the Update List form and the data
+    @RequestMapping(value = "/booklist/update/{id}", method = RequestMethod.GET)
+    public ModelAndView loadUpdateBookListForm(@PathVariable("id") long id){
+        ModelAndView modelAndView = new ModelAndView("updateBookListForm");
+        BookList booklist = bookListImpleme.findById(id);
+        modelAndView.addObject("booklist",booklist);
+        return modelAndView;
+    }
+
+    //Update the list on the database
+    @RequestMapping(value = "/booklist/update/{id}", method = RequestMethod.POST)
+    public String updateBookList(@PathVariable("id") long id, BookList booklist){
+        booklist.setDateCreation(LocalDate.now());
+        bookListImpleme.save(booklist);
         return "redirect:/booklist";
     }
 

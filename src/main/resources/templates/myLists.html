@@ -35,6 +35,8 @@
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Created at</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,9 +47,9 @@
                             <span th:text="${blist.name}"></span>
                         </a>
                     </td>
-                    <td><span th:text="${blist.dateCreation}"></span></td>
+                    <td><span th:text="${#temporals.format(blist.dateCreation, 'MM-dd-yyyy')}"></span></td>
                     <td><a class="btn btn-outline-danger" th:href="${(#mvc.url('BLC#deleteList').arg(0, blist.id)).build()}">delete</a></td>
-<!--                    <td><a class="btn btn-success" th:href="${(#mvc.url('BC#loadUpdateBookForm').arg(0, book.id)).build()}" >update</a></td>-->
+                    <td><a class="btn btn-success" th:href="${(#mvc.url('BLC#loadUpdateBookListForm').arg(0, blist.id)).build()}">update</a></td>
                 </tr>
                 </tbody>
             </table>

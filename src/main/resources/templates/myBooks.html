@@ -30,7 +30,7 @@
         </nav>
         <!-- List of books -->
         <div class="container" style="margin-top: 10px">
-            <h1 class="text-center display-4">My read books in 2022!</h1>
+            <h1 class="text-center display-4">My read books</h1>
             <table class="table">
                 <thead>
                 <tr>
@@ -52,8 +52,8 @@
                         </a>
                     </td>
                     <td><span th:text="${book.author}"></span></td>
-                    <td><span th:text="${book.publishingDate}"></span></td>
-                    <td><span th:text="${book.readingDate}"></span></td>
+                    <td><span th:text="${#temporals.format(book.publishingDate, 'MM-dd-yyyy')}"></span></td>
+                    <td><span th:text="${#temporals.format(book.readingDate, 'MM-dd-yyyy')}"></span></td>
                     <td><a class="btn btn-outline-danger" th:href="${(#mvc.url('BC#deleteBook').arg(0,  book.id)).build()}">delete</a></td>
                     <td><a class="btn btn-success" th:href="${(#mvc.url('BC#loadUpdateBookForm').arg(0, book.id)).build()}" >update</a></td>
                 </tr>

@@ -1,5 +1,6 @@
 package com.jhones.booklist.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,7 +21,7 @@ public class BookList {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateCreation;
 
-    @OneToMany(mappedBy = "bookList",cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "bookList",cascade = CascadeType.ALL)
     private List<Book> books;
 
     public List<Book> getBooks() {
