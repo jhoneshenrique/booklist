@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Controller
@@ -29,8 +32,12 @@ public class BookListController {
 
     //Add a booklist to database
     @RequestMapping(value = "/booklist/create", method = RequestMethod.POST)
-    public String saveBookList(BookList bookList){
+    public String saveBookList(@Valid BookList bookList, BindingResult result, RedirectAttributes attributes){
         bookList.setDateCreation(LocalDate.now());
+        if(result.hasErrors()){
+            attributes.addFlashAttribute("message","All the fields must be filled");
+            return "redirect:/booklist/create";
+        }
         bookListImpleme.save(bookList);
         return "redirect:/booklist";
     }

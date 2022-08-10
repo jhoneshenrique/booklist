@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,6 +27,8 @@
 
         <div>
             <h1 class="display-4">Add a new list</h1>
+            <!-- Determina a inclusão de um html separado-->
+            <th:block th:include="validationMessage"></th:block>
             <form method="post">
                 <div class="form-group mb-3">
                     <label for="name" class="form-label">Name:</label>

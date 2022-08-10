@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -41,9 +44,13 @@ public class BookController {
 
     //Saves the book according to its specific list
     @RequestMapping(value = "/book/create/{id}", method = RequestMethod.POST)
-    public String saveBook(@PathVariable("id") long id, Book book){
+    public String saveBook(@PathVariable("id") long id, @Valid Book book, BindingResult result, RedirectAttributes attributes){
         BookList bookList = bookListImplementation.findById(id);
         book.setBookList(bookList);
+        if(result.hasErrors()){
+            attributes.addFlashAttribute("message","All the fields must be filled");
+            return "redirect:/book/create/"+bookList.getId();
+        }
         bookService.save(book);
         return "redirect:/booklist";
     }
