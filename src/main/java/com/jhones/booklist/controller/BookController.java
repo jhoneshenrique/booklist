@@ -30,11 +30,6 @@ public class BookController {
 
     // Routes
 
-    //Load Index Route
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(){
-        return ("/index");
-    }
 
     //Loads the save a book view
     @RequestMapping(value = "/book/create/{id}", method = RequestMethod.GET)

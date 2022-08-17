@@ -3,6 +3,7 @@ package com.jhones.booklist.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Collection;
@@ -16,6 +17,16 @@ public class User implements UserDetails {
     private String fullName;
 
     private String pass;
+
+    private String photo;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public String getLogin() {
         return login;
@@ -40,6 +51,8 @@ public class User implements UserDetails {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
+    //------------ Spring Security --------------------------------------------------------------
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -75,4 +88,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

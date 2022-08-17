@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Book</title>
+    <!-- Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Book List</a>
+        </div>
+    </nav>
+</header>
+<section>
+    <div class="container"  style="width: 70%; margin-top: 20px">
+        <!-- BREADCRUMB -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">New User</li>
+            </ol>
+        </nav>
+
+        <div>
+            <h1 class="display-4">Create New User</h1>
+            <!-- Determina a inclusão de um html separado-->
+<!--            <th:block th:include="validationMessage"></th:block>-->
+            <form th:action="@{/user/create}"
+                  th:object="${user}" method="post"
+                  enctype="multipart/form-data">
+                <div class="form-group mb-3">
+                    <label for="login" class="form-label">Login:</label>
+                    <input type="text" class="form-control" id="login" name="login">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="fullName" class="form-label">Full Name:</label>
+                    <input type="text" class="form-control" id="fullName" name="fullName">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="login" class="form-label">Login:</label>
+                    <input type="password" class="form-control" id="pass" name="pass">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Profile Image:</label>
+                    <input class="form-control" type="file" id="image" name="image" accept="image/png, image/jpeg">
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 15px;">New User</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

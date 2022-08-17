@@ -16,4 +16,9 @@ public class UserServiceImplementation implements UserService {
     public User findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 }
