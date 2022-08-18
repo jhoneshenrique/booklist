@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
@@ -21,33 +24,27 @@ public class UserController {
     @Autowired
     UserServiceImplementation userService;
 
-    @RequestMapping(value = "/user/form", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/create", method = RequestMethod.GET)
     public String loadSaveUserForm(){
+
         return "/saveUserForm";
     }
 
-    @PostMapping("/user/create")
-    public RedirectView saveUser(User user,
-                                 @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    @RequestMapping(value = "/user/create", method = RequestMethod.POST)
+    public String saveUser(@Valid User user, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("message","All the fields must be filled");
+            return "redirect:/user/create";
+        }
 
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        System.out.println(fileName);
-        System.out.println(user.getLogin());
-        System.out.println(user.getPass());
-        user.setPhoto(fileName);
-        System.out.println(user.getPhoto());
+        String password = new BCryptPasswordEncoder().encode(user.getPass());
+        user.setPass(password);
 
-        user.setPass(new BCryptPasswordEncoder().encode(user.getPass()));
-        System.out.println(user.getPass());
+        userService.save(user);
 
-        User savedUser = userService.save(user);
-
-        String uploadDir = "/home/jhones/Desktop/booklist_project/booklist/user-photos/" + savedUser.getLogin();
-
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-
-        return new RedirectView("/", true);
+        return "redirect:/";
     }
+
 
 
 }

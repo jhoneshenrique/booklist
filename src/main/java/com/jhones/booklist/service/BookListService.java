@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface BookListService {
     List<BookList> findAll();
+
+    List<BookList> findAllById(String login);
+
     BookList findById(long id);
     BookList save(BookList bookList);
 

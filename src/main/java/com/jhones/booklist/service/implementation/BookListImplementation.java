@@ -20,6 +20,11 @@ public class BookListImplementation implements BookListService {
     }
 
     @Override
+    public List<BookList> findAllById(String login) {
+        return bookListRepository.findAllById(login);
+    }
+
+    @Override
     public BookList findById(long id) {
         return bookListRepository.findById(id).get();
     }

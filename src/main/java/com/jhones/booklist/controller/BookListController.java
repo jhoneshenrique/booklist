@@ -2,7 +2,9 @@ package com.jhones.booklist.controller;
 
 import com.jhones.booklist.model.Book;
 import com.jhones.booklist.model.BookList;
+import com.jhones.booklist.model.User;
 import com.jhones.booklist.service.implementation.BookListImplementation;
+import com.jhones.booklist.service.implementation.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,9 +22,13 @@ import java.time.LocalDate;
 @Controller
 public class BookListController {
 
-    //Dependency Injection
+    //------------ Dependency Injection--------------------------------------------------------
     @Autowired
     BookListImplementation bookListImpleme;
+
+    @Autowired
+    UserServiceImplementation userService;
+    
 
     //Load create booklist view
     @RequestMapping(value = "/booklist/create", method = RequestMethod.GET)
@@ -34,6 +40,17 @@ public class BookListController {
     @RequestMapping(value = "/booklist/create", method = RequestMethod.POST)
     public String saveBookList(@Valid BookList bookList, BindingResult result, RedirectAttributes attributes){
         bookList.setDateCreation(LocalDate.now());
+        //Get the current user information
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        User user = userService.findByLogin(username);
+        bookList.setUser(user);
         if(result.hasErrors()){
             attributes.addFlashAttribute("message","All the fields must be filled");
             return "redirect:/booklist/create";
@@ -46,7 +63,14 @@ public class BookListController {
     @RequestMapping(value = "/booklist", method = RequestMethod.GET)
     public ModelAndView listBooklist(){
         ModelAndView modelAndView = new ModelAndView("myLists");
-        Iterable<BookList> booklist = bookListImpleme.findAll();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        Iterable<BookList> booklist = bookListImpleme.findAllById(username);
         modelAndView.addObject("booklist",booklist);
         return modelAndView;
     }

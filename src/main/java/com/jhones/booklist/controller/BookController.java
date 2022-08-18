@@ -62,14 +62,14 @@ public class BookController {
 
 
         //Get the current user information
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        if (principal instanceof UserDetails) {
-//            String username = ((UserDetails)principal).getUsername();
-//            System.out.println(username);
-//        } else {
-//            String username = principal.toString();
-//            System.out.println(username);
-//        }
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails)principal).getUsername();
+            System.out.println(username);
+        } else {
+            String username = principal.toString();
+            System.out.println(username);
+        }
 
 
         return modelAndView;

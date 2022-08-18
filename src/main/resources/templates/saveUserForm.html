@@ -29,9 +29,7 @@
             <h1 class="display-4">Create New User</h1>
             <!-- Determina a inclusão de um html separado-->
 <!--            <th:block th:include="validationMessage"></th:block>-->
-            <form th:action="@{/user/create}"
-                  th:object="${user}" method="post"
-                  enctype="multipart/form-data">
+            <form method="post">
                 <div class="form-group mb-3">
                     <label for="login" class="form-label">Login:</label>
                     <input type="text" class="form-control" id="login" name="login">
@@ -41,13 +39,13 @@
                     <input type="text" class="form-control" id="fullName" name="fullName">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="login" class="form-label">Login:</label>
+                    <label for="login" class="form-label">Password:</label>
                     <input type="password" class="form-control" id="pass" name="pass">
                 </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Profile Image:</label>
-                    <input class="form-control" type="file" id="image" name="image" accept="image/png, image/jpeg">
-                </div>
+<!--                <div class="mb-3">-->
+<!--                    <label for="image" class="form-label">Profile Image:</label>-->
+<!--                    <input class="form-control" type="file" id="image" name="image" accept="image/png, image/jpeg">-->
+<!--                </div>-->
                 <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 15px;">New User</button>
             </form>
         </div>

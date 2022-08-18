@@ -6,26 +6,33 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class User implements UserDetails {
 
+    @NotBlank
     @Id
     private String login;
 
+    @NotBlank
     private String fullName;
 
+    @NotBlank
     private String pass;
 
-    private String photo;
+    @OneToMany
+    private List<BookList> bookLists;
 
-    public String getPhoto() {
-        return photo;
+    public List<BookList> getBookLists() {
+        return bookLists;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setBookLists(List<BookList> bookLists) {
+        this.bookLists = bookLists;
     }
 
     public String getLogin() {

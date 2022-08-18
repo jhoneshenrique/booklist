@@ -26,6 +26,17 @@ public class BookList {
     @OneToMany(mappedBy = "bookList",cascade = CascadeType.ALL)
     private List<Book> books;
 
+    @ManyToOne
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public List<Book> getBooks() {
         return books;
     }
