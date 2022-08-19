@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <!-- Bootstrap-->
@@ -11,9 +11,13 @@
     <nav class="navbar bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand text-white" href="#">BookList</a>
-            <form class="d-flex">
+            <form class="d-flex" sec:authorize="isAnonymous()">
                 <a class="btn btn-outline-light me-2" href="/login" role="button">Sign in</a>
                 <a class="btn btn-outline-light" href="/user/create" role="button">Sign up</a>
+            </form>
+            <form class="d-flex" sec:authorize="isAuthenticated()">
+                <a class="btn btn-outline-light me-2" href="/booklist" role="button">My Lists</a>
+                <a class="btn btn-outline-light me-2" href="/logout" role="button">Sign out</a>
             </form>
         </div>
     </nav>

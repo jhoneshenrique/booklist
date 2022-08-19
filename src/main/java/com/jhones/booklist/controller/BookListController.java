@@ -28,7 +28,7 @@ public class BookListController {
 
     @Autowired
     UserServiceImplementation userService;
-    
+
 
     //Load create booklist view
     @RequestMapping(value = "/booklist/create", method = RequestMethod.GET)
@@ -94,9 +94,21 @@ public class BookListController {
 
     //Update the list on the database
     @RequestMapping(value = "/booklist/update/{id}", method = RequestMethod.POST)
-    public String updateBookList(@PathVariable("id") long id, BookList booklist){
-        booklist.setDateCreation(LocalDate.now());
-        bookListImpleme.save(booklist);
+    public String updateBookList(@PathVariable("id") long id, BookList bookList){
+        bookList.setDateCreation(LocalDate.now());
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        User user = userService.findByLogin(username);
+        bookList.setUser(user);
+
+        bookListImpleme.save(bookList);
         return "redirect:/booklist";
     }
 
